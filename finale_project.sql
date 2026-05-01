@@ -70,6 +70,7 @@ c)	среднее количество клиентов, которые сове
 d)	долю от общего количества операций за год и долю в месяц от общей суммы операций;
 e)	вывести % соотношение M/F/NA в каждом месяце с их долей затрат;
 
+#корректный код с CROSS JOIN 
 WITH base AS (
     SELECT
         DATE_FORMAT(t.date_new, '%Y-%m') AS ym,
@@ -135,10 +136,9 @@ SELECT
     gm.sum_gender / m.total_sum AS gender_sum_share
 
 FROM monthly m
-JOIN year_totals yt
+CROSS JOIN year_totals yt
 JOIN gender_month gm USING (ym)
 ORDER BY m.ym, gm.Gender;
-
 
 3.	возрастные группы клиентов с шагом 10 лет и отдельно клиентов, у которых нет данной информации,
  с параметрами сумма и количество операций за весь период, и поквартально - средние показатели и %.
